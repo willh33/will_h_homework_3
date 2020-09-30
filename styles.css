@@ -1,0 +1,8 @@
+body {
+	background-color: #f7f7f7;
+}
+
+.dashed-background {
+	border: 2px dashed lightgrey;
+	border-radius: 5px;
+}
