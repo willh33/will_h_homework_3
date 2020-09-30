@@ -2,7 +2,7 @@ body {
 	background-color: #f7f7f7;
 }
 
-.dashed-background {
+.dashed-border {
 	border: 2px dashed lightgrey;
 	border-radius: 5px;
 }
