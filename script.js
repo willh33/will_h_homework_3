@@ -23,12 +23,17 @@ let specialCharacters = " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 // Write password to the #password input
 function writePassword() {
   let password = generatePassword();
-  let passwordText = document.querySelector("#password");
 
-  passwordText.textContent = password;
-  passwordText.select();
-  document.execCommand("copy");
-  alert("Password has been copied to clipboard!");
+  //Verify we received a valid password
+  if(password !== "")
+  {
+    let passwordText = document.querySelector("#password");
+
+    passwordText.textContent = password;
+    passwordText.select();
+    document.execCommand("copy");
+    alert("Password has been copied to clipboard!");
+  }
 }
 
 function generatePassword() {
@@ -38,7 +43,7 @@ function generatePassword() {
   //At least one has to be checked
   if(!includeLowercase && !includeNumeric && !includeUppercase && !includeSpecial){
     alert("You must select at least one of the following: Lowercase, Uppercase, Numeric, and / or Special")
-    return;
+    return "";
   }
 
   //create an array of the valid character sets
@@ -50,7 +55,7 @@ function generatePassword() {
   //Verify the number of characters is between 8 and 128
   if(numCharacters < 8 || numCharacters > 128) {
     alert("Enter a number between 8 and 128");
-    return;
+    return ""; 
   }
 
   let password = "";
