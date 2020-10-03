@@ -4,6 +4,7 @@ let numCharactersEl = document.getElementById('numCharacters');
 let uppercaseCheckbox = document.getElementById('uppercase');
 let lowerCaseCheckbox = document.getElementById('lowercase');
 let specialCheckbox = document.getElementById('special');
+let passwordParagraph = document.getElementById('password')
 let numericCheckbox = document.getElementById('numeric');
 
 let includeLowercase = true;
@@ -11,13 +12,18 @@ let includeUppercase = true;
 let includeNumeric = true;
 let includeSpecial = true;
 
+let uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let lowercase = 'abcdefghijklmnopqrstuvwxyz';
+let numbers = '0123456789';
+let specialCharacters = " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+
 
 // Write password to the #password input
 function writePassword() {
   let password = generatePassword();
   let passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.textContent = password;
 
 }
 
@@ -34,6 +40,17 @@ function generatePassword() {
     return;
   }
 
+  //create an array of the valid character sets
+  let validCharacterSets = [];
+  if(includeLowercase)
+    validCharacterSets.push(lowercase);
+  if(includeUppercase)
+    validCharacterSets.push(uppercase);
+  if(includeNumeric)
+    validCharacterSets.push(numbers);
+  if(includeSpecial)
+    validCharacterSets.push(specialCharacters);
+
   //Get the number of characters
   let numCharacters = numCharactersEl.value;
 
@@ -43,11 +60,17 @@ function generatePassword() {
     return;
   }
 
-  Math.random().toString(numCharacters).replace(/[^a-z]+/g, '');
+  let password = "";
+  //Do a for loop that runs from i=0 to i=number of characters - 1;
+  //each time create a random character from a random set of the included characters 
+  for(let i = 0; i < numCharacters - 1; i++)
+  {
+    let characterSet = validCharacterSets[Math.floor(Math.random() * validCharacterSets.length)];
+    let character = characterSet[Math.floor(Math.random() * characterSet.length)];
+    password += character;
+  }
 
-  //Should i divide the password out evenly beteween each one?
-
-
+  return password;
 }
 
 // Add event listener to generate button
