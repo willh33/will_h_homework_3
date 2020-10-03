@@ -14,3 +14,7 @@ body {
 .card {
 	box-shadow: 0 0 5px 0 rgb(0, 0, 0, .5);
 }
+/* Makes so the text of the password doesn't go outside the borders */
+#password {
+	width: 100%;
+}
